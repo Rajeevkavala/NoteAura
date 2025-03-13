@@ -108,7 +108,7 @@ body {
     color: inherit !important;
   }
   code{
-    color: white;
+    color: var(--gray-4);
   }
   .tiptap p.is-editor-empty:first-child::before {
     content: attr(data-placeholder);
