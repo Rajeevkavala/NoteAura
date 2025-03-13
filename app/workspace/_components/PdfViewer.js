@@ -28,11 +28,10 @@ const PdfViewer = ({ fileUrl }) => {
   return (
     <div className="mt-2 rounded-lg shadow-md">
       <iframe
-        src={fileUrl + "#toolbar=0"}
+        src={fileUrl}
         width="100%"
         className="h-[90vh]"
         title="PDF Viewer"
-        onLoad={() => console.log('PDF loaded')} // Optional: for debugging
       />
     </div>
   )
