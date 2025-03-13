@@ -1,14 +1,30 @@
 "use client";
 import { api } from "@/convex/_generated/api";
 import { useUser } from "@clerk/nextjs";
-import { useQuery } from "convex/react";
-import React, { useState } from "react";
+import { useMutation, useQuery } from "convex/react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import UploadPdfDialog from "./_components/UploadPdfDialog"; // Assuming this is your upload dialog component
 
 const Dashboard = () => {
   const { user } = useUser();
+  
+  const createUser = useMutation(api.user.createUser);
+
+  useEffect(()=>{
+    user&&CheckUser();
+  },[user])
+
+  const CheckUser= async() =>{
+    const result = await createUser({
+      email:user?.primaryEmailAddress?.emailAddress,
+      imageUrl:user?.imageUrl,
+      userName:user?.fullName
+    });
+    
+  }
+
   const fileList = useQuery(api.fileStorage.getUserFiles, {
     userEmail: user?.primaryEmailAddress?.emailAddress,
   });
