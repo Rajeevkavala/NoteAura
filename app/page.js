@@ -26,12 +26,12 @@ export default function Home() {
 
     try {
       const result = await createUser({
-        email: user?.primaryEmailAddress?.emailAddress ?? "",
-        imageUrl: user?.imageUrl ?? "",
-        userName: user?.fullName ?? "",
+        email: user?.primaryEmailAddress?.emailAddress,
+        imageUrl: user?.imageUrl,
+        userName: user?.fullName,
       });
 
-      console.log(result); // Handle result further if needed
+      console.log(result); // You can add more handling based on result.
     } catch (err) {
       setError("Error creating user.");
       console.error(err);
