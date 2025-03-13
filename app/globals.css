@@ -107,7 +107,9 @@ body {
   strong, em, u, s, mark {
     color: inherit !important;
   }
-
+  code{
+    color: white;
+  }
   .tiptap p.is-editor-empty:first-child::before {
     content: attr(data-placeholder);
     color: var(--gray-4);
