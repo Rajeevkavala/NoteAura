@@ -14,7 +14,7 @@ export const createUser = mutation({
       .collect();
 
     // If user doesn't exist, insert a new user
-    if (user?.length === 0) {
+    if (user?.length == 0) {
       await ctx.db.insert("users", {
         email: args.email,
         userName: args.userName,  // Fixed here: using args.userName instead of args.email
