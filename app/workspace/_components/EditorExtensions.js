@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import { chatSession } from "@/configs/AIModel";
 import { api } from "@/convex/_generated/api";
 import { useUser } from "@clerk/nextjs";
