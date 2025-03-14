@@ -103,11 +103,14 @@ const EditorExtensions = ({ editor }) => {
         ?.map((item) => item.pageContent)
         .join(" ") || "No content found";
 
-      const PROMPT = `
-        For question: "${selectedText}"
-        with the given content as the answer,
-        please provide an appropriate response in HTML format.
-        The answer content is: "${AllUnformattedAns}"
+        const PROMPT = `
+        As a note-taking assistant for students, generate a well-structured HTML response for the following question: "${selectedText}".
+        
+        If the provided answer content is relevant, format it properly in HTML for clarity and readability.
+        
+        If the answer content ("${AllUnformattedAns}") is not suitable, generate a well-explained response using Gemini, ensuring it is concise, informative, and formatted in HTML.
+        
+        Provide only the HTML output without any additional descriptions or context.
       `;
 
       const AiModelResult = await chatSession.sendMessage(PROMPT);
