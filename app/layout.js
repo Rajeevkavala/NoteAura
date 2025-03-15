@@ -12,7 +12,7 @@ export default function RootLayout({ children }) {
     <>
     <ClerkProvider afterSignOutUrl="https://noteaura.vercel.app/">
       <html lang="en">
-        <body className={poppins.className}>
+        <body>
           <ThemeProvider
             attribute="class"
             defaultTheme="system"
