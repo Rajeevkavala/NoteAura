@@ -13,7 +13,7 @@ const poppins = Poppins({ subsets: ["latin"], weight: "400", display: "swap" });
 export default function RootLayout({ children }) {
   return (
     <>
-    <ClerkProvider afterSignOutUrl="/">
+    <ClerkProvider afterSignOutUrl="https://noteaura.vercel.app/">
       <html lang="en">
         <body className={poppins.className}>
           <ThemeProvider
