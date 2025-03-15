@@ -12,12 +12,10 @@ import {
   Heading2Icon,
   Heading3Icon,
   Highlighter,
-  ItalicIcon,
   List,
   ListOrdered,
   Save,
   Sparkles,
-  Strikethrough,
   Underline,
 } from "lucide-react";
 import { useParams } from "next/navigation";
@@ -144,7 +142,6 @@ const EditorExtensions = ({ editor }) => {
         return new TextRun({
           text: node.textContent,
           bold: node.parentElement?.tagName === "STRONG" || node.parentElement?.tagName === "B",
-          italics: node.parentElement?.tagName === "EM" || node.parentElement?.tagName === "I",
           underline: node.parentElement?.tagName === "U" ? {} : undefined,
           break: node.parentElement?.tagName === "BR" ? 1 : 0,
         });
@@ -295,16 +292,6 @@ const EditorExtensions = ({ editor }) => {
             <BoldIcon size={20} />
           </motion.button>
 
-          <motion.button
-            variants={buttonVariants}
-            whileHover="hover"
-            whileTap="tap"
-            onClick={() => editor.chain().focus().toggleItalic().run()}
-            className={`${buttonClass} ${editor.isActive("italic") ? activeClass : ""}`}
-            title="Italic"
-          >
-            <ItalicIcon size={20} />
-          </motion.button>
 
           <motion.button
             variants={buttonVariants}
@@ -354,17 +341,6 @@ const EditorExtensions = ({ editor }) => {
             variants={buttonVariants}
             whileHover="hover"
             whileTap="tap"
-            onClick={() => editor.chain().focus().toggleStrike().run()}
-            className={`${buttonClass} ${editor.isActive("strike") ? activeClass : ""}`}
-            title="Strikethrough"
-          >
-            <Strikethrough size={20} />
-          </motion.button>
-
-          <motion.button
-            variants={buttonVariants}
-            whileHover="hover"
-            whileTap="tap"
             onClick={() => editor.chain().focus().setTextAlign("left").run()}
             className={`${buttonClass} ${editor.isActive({ textAlign: "left" }) ? activeClass : ""}`}
             title="Align Left"
@@ -396,35 +372,40 @@ const EditorExtensions = ({ editor }) => {
 
           <motion.button
             variants={buttonVariants}
-            whileHover="hover"
-            whileTap="tap"
+            whileHover={{ scale: 1.1, y: -2 }}
+            whileTap={{ scale: 0.95 }}
             onClick={onAiClick}
             disabled={isLoadingAI}
-            className={`${buttonClass} relative`}
+            className={`${buttonClass} relative flex items-center justify-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 active:scale-95 transition-all disabled:opacity-50 disabled:cursor-not-allowed`}
             title="AI Assistant"
+            aria-label="Generate AI Response"
           >
             <AnimatePresence mode="wait">
               {isLoadingAI ? (
                 <motion.div
                   key="loader"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.8 }}
+                  transition={{ duration: 0.2 }}
                 >
                   <Loader2 size={20} className="animate-spin" />
                 </motion.div>
               ) : (
                 <motion.div
                   key="icon"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.8 }}
+                  transition={{ duration: 0.2 }}
                 >
                   <Sparkles size={20} />
                 </motion.div>
               )}
             </AnimatePresence>
+            <span className="font-medium">{isLoadingAI ? "Generating..." : "Generate"}</span>
           </motion.button>
+
 
           <motion.button
             variants={buttonVariants}
