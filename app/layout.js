@@ -10,7 +10,7 @@ import ProgressBar from "@/components/ui/ProgressBar"; // Import Progress Bar
 export default function RootLayout({ children }) {
   return (
     <>
-    <ClerkProvider afterSignOutUrl="https://noteaura.vercel.app/">
+    <ClerkProvider afterSignOutUrl="/sign-in">
       <html lang="en">
         <body>
           <ThemeProvider
