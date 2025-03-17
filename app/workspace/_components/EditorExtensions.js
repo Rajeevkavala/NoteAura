@@ -244,19 +244,19 @@ const EditorExtensions = ({ editor }) => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.3 }}
-      className="p-5 bg-white dark:bg-black dark:text-white border-b sticky top-0 z-10"
+      className="p-2 sm:p-5 bg-white dark:bg-black dark:text-white border-b sticky top-0 z-10"
     >
       <div className="control-group">
-        <div className="button-group flex gap-2 flex-wrap">
+        <div className="button-group flex gap-1 sm:gap-2 flex-wrap">
           <motion.button
             variants={buttonVariants}
             whileHover="hover"
             whileTap="tap"
             onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
-            className={`${buttonClass} ${editor.isActive("heading", { level: 1 }) ? activeClass : ""}`}
+            className={`${buttonClass} hidden sm:block ${editor.isActive("heading", { level: 1 }) ? activeClass : ""}`}
             title="Heading 1"
           >
-            <Heading1Icon size={20} />
+            <Heading1Icon size={16} className="sm:w-5 sm:h-5" />
           </motion.button>
 
           <motion.button
@@ -264,10 +264,10 @@ const EditorExtensions = ({ editor }) => {
             whileHover="hover"
             whileTap="tap"
             onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
-            className={`${buttonClass} ${editor.isActive("heading", { level: 2 }) ? activeClass : ""}`}
+            className={`${buttonClass} hidden sm:block ${editor.isActive("heading", { level: 2 }) ? activeClass : ""}`}
             title="Heading 2"
           >
-            <Heading2Icon size={20} />
+            <Heading2Icon size={16} className="sm:w-5 sm:h-5" />
           </motion.button>
 
           <motion.button
@@ -275,10 +275,10 @@ const EditorExtensions = ({ editor }) => {
             whileHover="hover"
             whileTap="tap"
             onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
-            className={`${buttonClass} ${editor.isActive("heading", { level: 3 }) ? activeClass : ""}`}
+            className={`${buttonClass} hidden sm:block ${editor.isActive("heading", { level: 3 }) ? activeClass : ""}`}
             title="Heading 3"
           >
-            <Heading3Icon size={20} />
+            <Heading3Icon size={16} className="sm:w-5 sm:h-5" />
           </motion.button>
 
           <motion.button
@@ -286,22 +286,21 @@ const EditorExtensions = ({ editor }) => {
             whileHover="hover"
             whileTap="tap"
             onClick={() => editor.chain().focus().toggleBold().run()}
-            className={`${buttonClass} ${editor.isActive("bold") ? activeClass : ""}`}
+            className={`${buttonClass} hidden sm:block ${editor.isActive("bold") ? activeClass : ""}`}
             title="Bold"
           >
-            <BoldIcon size={20} />
+            <BoldIcon size={16} className="sm:w-5 sm:h-5" />
           </motion.button>
-
 
           <motion.button
             variants={buttonVariants}
             whileHover="hover"
             whileTap="tap"
             onClick={() => editor.chain().focus().toggleUnderline().run()}
-            className={`${buttonClass} ${editor.isActive("underline") ? activeClass : ""}`}
+            className={`${buttonClass} hidden sm:block ${editor.isActive("underline") ? activeClass : ""}`}
             title="Underline"
           >
-            <Underline size={20} />
+            <Underline size={16} className="sm:w-5 sm:h-5" />
           </motion.button>
 
           <motion.button
@@ -309,10 +308,10 @@ const EditorExtensions = ({ editor }) => {
             whileHover="hover"
             whileTap="tap"
             onClick={() => editor.chain().focus().toggleBulletList().run()}
-            className={`${buttonClass} ${editor.isActive("bulletList") ? activeClass : ""}`}
+            className={`${buttonClass} hidden sm:block ${editor.isActive("bulletList") ? activeClass : ""}`}
             title="Bullet List"
           >
-            <List size={20} />
+            <List size={16} className="sm:w-5 sm:h-5" />
           </motion.button>
 
           <motion.button
@@ -320,10 +319,10 @@ const EditorExtensions = ({ editor }) => {
             whileHover="hover"
             whileTap="tap"
             onClick={() => editor.chain().focus().toggleOrderedList().run()}
-            className={`${buttonClass} ${editor.isActive("orderedList") ? activeClass : ""}`}
+            className={`${buttonClass} hidden sm:block ${editor.isActive("orderedList") ? activeClass : ""}`}
             title="Ordered List"
           >
-            <ListOrdered size={20} />
+            <ListOrdered size={16} className="sm:w-5 sm:h-5" />
           </motion.button>
 
           <motion.button
@@ -331,10 +330,10 @@ const EditorExtensions = ({ editor }) => {
             whileHover="hover"
             whileTap="tap"
             onClick={() => editor.chain().focus().toggleHighlight({ color: "red" }).run()}
-            className={`${buttonClass} ${editor.isActive("highlight", { color: "red" }) ? activeClass : ""}`}
+            className={`${buttonClass} hidden sm:block ${editor.isActive("highlight", { color: "red" }) ? activeClass : ""}`}
             title="Highlight"
           >
-            <Highlighter size={20} />
+            <Highlighter size={16} className="sm:w-5 sm:h-5" />
           </motion.button>
 
           <motion.button
@@ -342,10 +341,10 @@ const EditorExtensions = ({ editor }) => {
             whileHover="hover"
             whileTap="tap"
             onClick={() => editor.chain().focus().setTextAlign("left").run()}
-            className={`${buttonClass} ${editor.isActive({ textAlign: "left" }) ? activeClass : ""}`}
+            className={`${buttonClass} hidden sm:block ${editor.isActive({ textAlign: "left" }) ? activeClass : ""}`}
             title="Align Left"
           >
-            <AlignLeft size={20} />
+            <AlignLeft size={16} className="sm:w-5 sm:h-5" />
           </motion.button>
 
           <motion.button
@@ -353,10 +352,10 @@ const EditorExtensions = ({ editor }) => {
             whileHover="hover"
             whileTap="tap"
             onClick={() => editor.chain().focus().setTextAlign("center").run()}
-            className={`${buttonClass} ${editor.isActive({ textAlign: "center" }) ? activeClass : ""}`}
+            className={`${buttonClass} hidden sm:block ${editor.isActive({ textAlign: "center" }) ? activeClass : ""}`}
             title="Align Center"
           >
-            <AlignCenter size={20} />
+            <AlignCenter size={16} className="sm:w-5 sm:h-5" />
           </motion.button>
 
           <motion.button
@@ -364,10 +363,10 @@ const EditorExtensions = ({ editor }) => {
             whileHover="hover"
             whileTap="tap"
             onClick={() => editor.chain().focus().setTextAlign("right").run()}
-            className={`${buttonClass} ${editor.isActive({ textAlign: "right" }) ? activeClass : ""}`}
+            className={`${buttonClass} hidden sm:block ${editor.isActive({ textAlign: "right" }) ? activeClass : ""}`}
             title="Align Right"
           >
-            <AlignRight size={20} />
+            <AlignRight size={16} className="sm:w-5 sm:h-5" />
           </motion.button>
 
           <motion.button
@@ -376,7 +375,7 @@ const EditorExtensions = ({ editor }) => {
             whileTap={{ scale: 0.95 }}
             onClick={onAiClick}
             disabled={isLoadingAI}
-            className={`${buttonClass} relative flex items-center justify-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 active:scale-95 transition-all disabled:opacity-50 disabled:cursor-not-allowed`}
+            className={`${buttonClass} relative flex items-center justify-center gap-1 sm:gap-2 px-2 sm:px-4 py-1 sm:py-2 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 active:scale-95 transition-all disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base`}
             title="AI Assistant"
             aria-label="Generate AI Response"
           >
@@ -389,7 +388,7 @@ const EditorExtensions = ({ editor }) => {
                   exit={{ opacity: 0, scale: 0.8 }}
                   transition={{ duration: 0.2 }}
                 >
-                  <Loader2 size={20} className="animate-spin" />
+                  <Loader2 size={16} className="animate-spin" />
                 </motion.div>
               ) : (
                 <motion.div
@@ -399,13 +398,13 @@ const EditorExtensions = ({ editor }) => {
                   exit={{ opacity: 0, scale: 0.8 }}
                   transition={{ duration: 0.2 }}
                 >
-                  <Sparkles size={20} />
+                  <Sparkles size={16} />
                 </motion.div>
               )}
             </AnimatePresence>
-            <span className="font-medium">{isLoadingAI ? "Generating..." : "Generate"}</span>
+            <span className="font-medium hidden sm:inline">{isLoadingAI ? "Generating..." : "Generate"}</span>
+            <span className="font-medium sm:hidden">{isLoadingAI ? "..." : "AI"}</span>
           </motion.button>
-
 
           <motion.button
             variants={buttonVariants}
@@ -413,7 +412,7 @@ const EditorExtensions = ({ editor }) => {
             whileTap="tap"
             onClick={handleSave}
             disabled={isSaving}
-            className={`${buttonClass} relative`}
+            className={`${buttonClass} hidden sm:block relative`}
             title="Save Notes (Ctrl+S)"
           >
             <AnimatePresence mode="wait">
@@ -424,7 +423,7 @@ const EditorExtensions = ({ editor }) => {
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                 >
-                  <Loader2 size={20} className="animate-spin" />
+                  <Loader2 size={16} className="animate-spin" />
                 </motion.div>
               ) : (
                 <motion.div
@@ -433,7 +432,7 @@ const EditorExtensions = ({ editor }) => {
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                 >
-                  <Save size={20} />
+                  <Save size={16} />
                 </motion.div>
               )}
             </AnimatePresence>
@@ -446,7 +445,7 @@ const EditorExtensions = ({ editor }) => {
               whileTap="tap"
               onClick={() => setShowDownloadOptions(!showDownloadOptions)}
               disabled={isDownloading}
-              className={`${buttonClass} relative`}
+              className={`${buttonClass} hidden sm:block relative`}
               title="Download Options"
             >
               <AnimatePresence mode="wait">
@@ -457,7 +456,7 @@ const EditorExtensions = ({ editor }) => {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                   >
-                    <Loader2 size={20} className="animate-spin" />
+                    <Loader2 size={16} className="animate-spin" />
                   </motion.div>
                 ) : (
                   <motion.div
@@ -466,7 +465,7 @@ const EditorExtensions = ({ editor }) => {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                   >
-                    <Download size={20} />
+                    <Download size={16} />
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -479,7 +478,7 @@ const EditorExtensions = ({ editor }) => {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ duration: 0.2 }}
-                  className="absolute right-0 mt-2 w-40 bg-white dark:bg-gray-800 border rounded shadow-lg z-20"
+                  className="absolute right-0 mt-2 w-32 sm:w-40 bg-white dark:bg-gray-800 border rounded shadow-lg z-20"
                 >
                   <button
                     onClick={handleDownloadPDF}

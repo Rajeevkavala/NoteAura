@@ -22,12 +22,12 @@ const Workspace = () => {
 return (
     <div>
         <WorkSpaceHeader fileName={fileInfo?.fileName}/>    
-        <div className='grid grid-cols-2 gap-1'>
+        <div className='grid grid-cols-1 lg:grid-cols-2 gap-1'>
             <div className='w-full'>
                 {/* For Text Editor */}
                 <TextEditor fileId={fileId}/>
             </div>
-            <div>
+            <div className='mt-4 lg:mt-0'>
                 {/* For PDF Viewer */}
                 <PdfViewer fileUrl={fileInfo?.fileUrl} />
             </div>

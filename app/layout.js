@@ -5,13 +5,15 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { ThemeProvider } from "@/components/ui/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import ProgressBar from "@/components/ui/ProgressBar"; // Import Progress Bar
+import { Inter } from "next/font/google";
 
+const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({ children }) {
   return (
     <>
     <ClerkProvider afterSignOutUrl="/sign-in">
-      <html lang="en">
+      <html lang="en" className={inter.className}>
         <body>
           <ThemeProvider
             attribute="class"

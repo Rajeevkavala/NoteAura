@@ -75,12 +75,12 @@ const TextEditor = ({ fileId }) => {
   }
 
   return (
-    <div className="border ml-2 mt-2 rounded-lg shadow-sm">
+    <div className="border mx-2 sm:ml-2 mt-2 rounded-lg shadow-sm">
       <EditorExtensions editor={editor} />
-      <div className="editor-content overflow-scroll h-[80vh] relative">
+      <div className="editor-content overflow-scroll h-[60vh] sm:h-[80vh] relative">
         <EditorContent editor={editor} />
         {editor?.isEmpty && (
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-gray-400 pointer-events-none text-center text-sm sm:text-base p-2">
             Type the question and then select the text and click on the generate button to get an answer
           </div>
         )}

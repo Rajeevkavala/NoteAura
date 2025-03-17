@@ -15,24 +15,26 @@ const Sidebar = () => {
   // Ensure user is loaded before running queries
   const userEmail = user?.primaryEmailAddress?.emailAddress;
 
-  const fileList = useQuery(api.fileStorage.getUserFiles, userEmail ? { userEmail } : undefined);
-
-  const GetUserInfo = useQuery(api.user.GetUserInfo, userEmail ? { email: userEmail } : undefined);
+  // Skip queries until userEmail is available
+  const fileList = useQuery(api.fileStorage.getUserFiles, userEmail ? { userEmail } : "skip");
+  const GetUserInfo = useQuery(api.user.GetUserInfo, userEmail ? { email: userEmail } : "skip");
 
   // Prevent rendering until user data is available
   if (!user) {
-    return   <div className="shadow-lg pt-5 h-screen bg-white dark:bg-gray-900 w-64 animate-pulse">
-    <div className="h-8 w-32 bg-gray-300 dark:bg-gray-700 rounded mx-auto mb-6"></div>
-    <div className="px-3 flex flex-col gap-4">
-      <div className="h-10 bg-gray-300 dark:bg-gray-700 rounded-xl w-full"></div>
-      <div className="h-10 bg-gray-300 dark:bg-gray-700 rounded-xl w-full"></div>
-      <div className="h-10 bg-gray-300 dark:bg-gray-700 rounded-xl w-full"></div>
-      <div className="absolute bottom-6 w-[85%] px-3">
-        <div className="h-6 bg-gray-300 dark:bg-gray-700 rounded-full w-3/4 mx-auto mb-3"></div>
-        <Progress value={50} className="h-2 bg-gray-200 dark:bg-gray-700 rounded-full" />
+    return (
+      <div className="shadow-lg pt-5 h-screen bg-white dark:bg-gray-900 w-64 animate-pulse">
+        <div className="h-8 w-32 bg-gray-300 dark:bg-gray-700 rounded mx-auto mb-6"></div>
+        <div className="px-3 flex flex-col gap-4">
+          <div className="h-10 bg-gray-300 dark:bg-gray-700 rounded-xl w-full"></div>
+          <div className="h-10 bg-gray-300 dark:bg-gray-700 rounded-xl w-full"></div>
+          <div className="h-10 bg-gray-300 dark:bg-gray-700 rounded-xl w-full"></div>
+          <div className="absolute bottom-6 w-[85%] px-3">
+            <div className="h-6 bg-gray-300 dark:bg-gray-700 rounded-full w-3/4 mx-auto mb-3"></div>
+            <Progress value={50} className="h-2 bg-gray-200 dark:bg-gray-700 rounded-full" />
+          </div>
+        </div>
       </div>
-    </div>
-  </div>;
+    );
   }
 
   return (
