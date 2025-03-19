@@ -102,14 +102,15 @@ const EditorExtensions = ({ editor }) => {
         .join(" ") || "No content found";
 
         const PROMPT = `
-        As a note-taking assistant for students, generate a well-structured HTML response for the following question: "${selectedText}".
+        As a note-taking assistant for students, generate a structured and well-formatted HTML response for the following question: "${selectedText}".
         
-        If the provided answer content is relevant, format it properly in HTML for clarity and readability.
+        - If the provided answer ("${AllUnformattedAns}") is relevant, format it clearly in HTML for readability.
+        - If the provided answer is unsuitable, generate a concise, well-explained response using Gemini, ensuring clarity and accuracy.
+        - If a comparison or differentiate is required, present it in an HTML table using <tr> and <td>.
         
-        If the answer content ("${AllUnformattedAns}") is not suitable, generate a well-explained response using Gemini, ensuring it is concise, informative, and formatted in HTML.
+        Output only the HTML content without any additional descriptions or context.
+        `;
         
-        Provide only the HTML and (if there is any comparison give the table with tr and td) output without any additional descriptions or context.
-      `;
 
       const AiModelResult = await chatSession.sendMessage(PROMPT);
       const FinalAns = AiModelResult.response
@@ -118,7 +119,7 @@ const EditorExtensions = ({ editor }) => {
         .trim();
 
       editor.commands.setContent(
-        `${AllText}<p><strong>Answer:</strong> ${FinalAns}</p>`
+        `${AllText}<p><strong>Answer:</strong></p>${FinalAns}`
       );
       
       await handleSave();
