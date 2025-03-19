@@ -108,7 +108,7 @@ const EditorExtensions = ({ editor }) => {
         
         If the answer content ("${AllUnformattedAns}") is not suitable, generate a well-explained response using Gemini, ensuring it is concise, informative, and formatted in HTML.
         
-        Provide only the HTML output without any additional descriptions or context.
+        Provide only the HTML and (if there is any comparison give the table with tr and td) output without any additional descriptions or context.
       `;
 
       const AiModelResult = await chatSession.sendMessage(PROMPT);
