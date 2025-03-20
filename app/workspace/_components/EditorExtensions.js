@@ -101,28 +101,30 @@ const EditorExtensions = ({ editor }) => {
         ?.map((item) => item.pageContent)
         .join(" ") || "No content found";
 
-        const PROMPT = `
-        As a note-taking assistant for students, generate a structured and well-formatted HTML response for the following question: "${selectedText}".
-        
-        - If the provided answer ("${AllUnformattedAns}") is relevant, format it clearly in HTML for readability.
-        - If the provided answer is unsuitable, generate a concise, well-explained response using Gemini, ensuring clarity and accuracy.
-        - If a comparison or differentiate is required, present it in an HTML table using <tr> and <td>.
-        
-        Output only the HTML content without any additional descriptions or context.
-        `;
-        
+      const PROMPT = `
+      As a note-taking assistant for students, generate a structured and well-formatted HTML response for the following question: "${selectedText}".
+      
+      - If the provided answer ("${AllUnformattedAns}") is relevant, format it clearly in HTML for readability.
+      - If the provided answer is unsuitable, generate a concise, well-explained response using Gemini, ensuring clarity and accuracy.
+      - If a comparison or differentiate is required, present it in an HTML table using <tr> and <td>.
+      
+      Output only the HTML content without any additional descriptions or context.
+      `;
+      
 
       const AiModelResult = await chatSession.sendMessage(PROMPT);
       const FinalAns = AiModelResult.response
         .text()
         .replace(/```html|```/g, "")
         .trim();
-
+      
       editor.commands.setContent(
-        `${AllText}<p><strong>Answer:</strong></p>${FinalAns}`
+        `${AllText}<p><strong>Answer:</strong></p>${FinalAns}`,
+        { parseOptions: { preserveWhitespace: 'full' } }
       );
       
       await handleSave();
+      console.log(FinalAns);
       toast.success("AI response added successfully!");
     } catch (error) {
       toast.error("Failed to process AI request");
@@ -179,7 +181,28 @@ const EditorExtensions = ({ editor }) => {
       setIsDownloading(true);
       setShowDownloadOptions(false);
       const content = editor.getHTML();
-      
+
+      // Create a temporary container to render the content for PDF conversion
+      const tempContainer = document.createElement('div');
+      tempContainer.innerHTML = content;
+      document.body.appendChild(tempContainer);
+
+      // Apply styles to ensure proper formatting
+      const style = document.createElement('style');
+      style.textContent = `
+        body { background-color: white; color: black; }
+        p, h1, h2, h3 { color: black; font-family: Arial, sans-serif; }
+        .pdf-container { margin: 20px; }
+      `;
+      tempContainer.appendChild(style);
+
+      // Wrap content in a container to apply margin
+      const pdfContainer = document.createElement('div');
+      pdfContainer.className = 'pdf-container';
+      pdfContainer.innerHTML = tempContainer.innerHTML;
+      tempContainer.innerHTML = '';
+      tempContainer.appendChild(pdfContainer);
+
       const opt = {
         margin: 1,
         filename: `document_${fileId}.pdf`,
@@ -188,7 +211,11 @@ const EditorExtensions = ({ editor }) => {
         jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
       };
 
-      await html2pdf().set(opt).from(content).save();
+      await html2pdf().set(opt).from(tempContainer).save();
+
+      // Clean up the temporary container
+      document.body.removeChild(tempContainer);
+
       toast.success("PDF downloaded successfully!");
     } catch (error) {
       toast.error("Failed to download PDF");

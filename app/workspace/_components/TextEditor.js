@@ -11,6 +11,10 @@ import OrderedList from '@tiptap/extension-ordered-list'
 import Highlight from '@tiptap/extension-highlight'
 import Strike from '@tiptap/extension-strike'
 import TextAlign from '@tiptap/extension-text-align'
+import Table from '@tiptap/extension-table'
+import TableRow from '@tiptap/extension-table-row'
+import TableCell from '@tiptap/extension-table-cell'
+import TableHeader from '@tiptap/extension-table-header'
 import { useQuery } from 'convex/react'
 import { api } from '@/convex/_generated/api'
 
@@ -38,6 +42,12 @@ const TextEditor = ({ fileId }) => {
       Heading.configure({
         levels: [1, 2, 3],
       }),
+      Table.configure({
+        resizable: true,
+      }),
+      TableRow,
+      TableCell,
+      TableHeader,
     ],
     editorProps: {
       attributes: {
