@@ -101,15 +101,16 @@ const EditorExtensions = ({ editor }) => {
         ?.map((item) => item.pageContent)
         .join(" ") || "No content found";
 
-      const PROMPT = `
-      As a note-taking assistant for students, generate a structured and well-formatted HTML response for the following question: "${selectedText}".
-      
-      - If the provided answer ("${AllUnformattedAns}") is relevant, format it clearly in HTML for readability.
-      - If the provided answer is unsuitable, generate a concise, well-explained response using Gemini, ensuring clarity and accuracy.
-      - If a comparison or differentiate is required, present it in an HTML table using <tr> and <td>.
-      
-      Output only the HTML content without any additional descriptions or context.
-      `;
+        const PROMPT = `
+        As an academic assistant focused on helping B.Tech students prepare for end-semester exams, generate a structured and well-formatted HTML response for the following question: "${selectedText}".
+        
+        - If the provided answer ("${AllUnformattedAns}") is accurate and relevant to exam preparation, format it in clean, readable HTML with clear headings, bullet points, and emphasis on key concepts.
+        - If the provided answer lacks clarity, accuracy, or relevance, regenerate a precise, exam-oriented explanation using Gemini, ensuring it's concise, technically correct, and easy to revise.
+        - For questions requiring comparisons or differentiation, present the information in an HTML table using <tr> and <td> for better visual understanding.
+        
+        Only output the HTML content. Do not include any additional descriptions or explanations outside the HTML.
+        `;
+        
       
 
       const AiModelResult = await chatSession.sendMessage(PROMPT);
